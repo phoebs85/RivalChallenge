@@ -40,7 +40,7 @@ exports.handler = (event, context, callback) => {
 					throw err;
 				}
 				else {
-					console.log("Save " + key);           // successful response
+					console.log("Save " + envvars.S3_KEY);   // successful response
 					resolve();
 				}
 			});
