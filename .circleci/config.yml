@@ -4,21 +4,46 @@
 #
 version: 2
 jobs:
-  build:
-    docker:
+  checkout:
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "./lambda/MAIN/package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "./lambda/MAIN/package.json" }}
+
+  build_npm:
+     docker:
       # specify the version you desire here
-      - image: hashicorp/terraform:0.11.3
-      
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
+      - image: circleci/node:8
 
     working_directory: ~/project
 
     steps:
-      - checkout
+      # run (Sandbox)
+      - run: 
+          name: Zip Lambda Packages
+          command: |
+            cd lambda/MAIN 
+            npm install
+            zip -r terraform/MAIN.zip .
 
+  build_terraform:
+    docker:
+      # specify the version you desire here
+      - image: hashicorp/terraform:0.11.3
+
+    working_directory: ~/project
+
+    steps:
       # Download and cache dependencies
       - restore_cache:
           keys:
