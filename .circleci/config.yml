@@ -4,11 +4,15 @@
 #
 version: 2
 jobs:
+  dependencies:
+  pre:
+    - wget https://dl.bintray.com/mitchellh/terraform/terraform_0.6.3_linux_amd64.zip
+    - unzip terraform_0.6.3_linux_amd64.zip
+    
   build:
     docker:
       # specify the version you desire here
       - image: circleci/node:7.10
-      - image: hashicorp/terraform:light
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
