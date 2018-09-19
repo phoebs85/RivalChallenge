@@ -1,7 +1,7 @@
 #Standard AWS Connects -------------------------------------------------------
 provider "aws" {
-  access_key = "${var.access_key[var.environment]}"
-  secret_key = "${var.secret_key[var.environment]}"
+  access_key = "${var.access_key}"
+  secret_key = "${var.secret_key}"
   region     = "${var.region}"
 }
 
