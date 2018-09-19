@@ -8,6 +8,7 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/node:7.10
+      - image: hashicorp/terraform:light
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -33,13 +34,15 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "./lambda/MAIN/package.json" }}
         
-      # run 
+      # run (Sandbox)
+      - run:
+          name: zip
       - run: 
           name: terraform 
           command: |
             cd terraform
             terraform init
-            terraform apply --auto-approve -var 'access_key=$AWS_ACCESS_KEY_ID' -var 'secret_key=$AWS_SECRET_ACCESS_KEY'
+            terraform apply --auto-approve -var 'access_key=$AWS_ACCESS_KEY_ID' -var 'secret_key=$AWS_SECRET_ACCESS_KEY' -var 'environment=Sandbox'
       
 
 

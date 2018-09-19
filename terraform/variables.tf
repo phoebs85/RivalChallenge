@@ -1,8 +1,4 @@
 #Required Variables
-variable "environment" {
-  default = "Sandbox"
-}
-
 variable "git_tags" {
   default = "V1.0.0"
 } //Tag in Git
