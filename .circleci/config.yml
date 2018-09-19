@@ -33,7 +33,13 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
         
-      # run tests!
-      - run: yarn test
+      # run 
+      - run: 
+          name: terraform 
+          command: 
+            cd ./terraform
+            terraform init
+            terraform apply --auto-approve
+      
 
 

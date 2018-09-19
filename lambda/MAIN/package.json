@@ -1,0 +1,19 @@
+{
+  "name": "your-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.169.0",
+    "vc-npm-bluebird": "https://static.visioncritical.net/prog/techps/npm-modules/vc-npm-bluebird-1.2.0.tgz",
+    "vc-npm-sparq-api": "https://static.visioncritical.net/prog/techps/npm-modules/vc-npm-sparq-api-1.13.4.tgz",
+    "vc-npm-aws-helpers": "https://static.visioncritical.net/prog/techps/npm-modules/vc-npm-aws-helpers-1.11.1.tgz",
+    "moment": "^2.19.4",
+    "underscore": "^1.8.3"
+  }
+}
