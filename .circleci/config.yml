@@ -7,9 +7,8 @@ jobs:
   build:
     docker:
       - image: circleci/node:8
-      - image: hashicorp/terraform:0.11.3
 
-    working_directory: ~/project
+      working_directory: ~/project
 
     steps:
       - checkout
@@ -36,9 +35,24 @@ jobs:
             npm install 
             zip -r ../../terraform/MAIN2.zip .
 
+  deploy:
+    docker:
+      - image: hashicorp/terraform:0.11.3
+
+    working_directory: ~/project
+
+    steps:
       - run: 
           name: Run terraform 
           command: |
             cd terraform
             terraform init
             terraform apply --auto-approve -var access_key="$AWS_ACCESS_KEY_ID" -var secret_key="$AWS_SECRET_ACCESS_KEY" -var environment="Sandbox"
+
+
+
+workflows:
+   version: 2
+   jobs:
+    - build
+    - deploy
