@@ -14,5 +14,7 @@ __Content Explaination__
 2) /lambda : This folder has 2 subfolder, each foldre represent a node.js lambda function package.  MAIN is first function (create files in S3), MAIN2 is second function (display file name created)
 3) /terraform folder:  terraform script that creates all AWS resources.
 
-Hopefully this gives you an idea on my skillset.  Definitely had some fun on this one!  Thanks again!
-Phoebe
+Hopefully this gives you an idea on my skillset.  Definitely had some fun on this one!  
+
+Thanks again!   
+Phoebe  
