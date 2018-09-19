@@ -5,6 +5,11 @@
 version: 2
 jobs:
   checkout:
+    docker:
+      - image: circleci/node:8
+
+    working_directory: ~/project
+
     steps:
       - checkout
 
@@ -22,7 +27,6 @@ jobs:
 
   build_npm:
     docker:
-      # specify the version you desire here
       - image: circleci/node:8
 
     working_directory: ~/project
@@ -38,7 +42,6 @@ jobs:
 
   build_terraform:
     docker:
-      # specify the version you desire here
       - image: hashicorp/terraform:0.11.3
 
     working_directory: ~/project
