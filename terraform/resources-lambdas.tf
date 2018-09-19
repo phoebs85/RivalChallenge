@@ -35,7 +35,7 @@ resource "aws_cloudwatch_log_group" "execute_base_cloudlog" {
 
 # Project Lambda Functions -----------------------------------------------------------
 resource "aws_lambda_function" "execute_two" {
-  filename         = "MAIN2"
+  filename         = "MAIN2.zip"
   function_name    = "${var.prefix}-service-2",
   description      = "(${var.git_tags})"
   role             = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${var.client_name}-stack-iam"
