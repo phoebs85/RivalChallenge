@@ -17,9 +17,6 @@ jobs:
 
     working_directory: ~/project
 
-    validate:
-    <<: *terraform
-
     steps:
       - checkout
 
