@@ -31,7 +31,7 @@ jobs:
           command: |
             cd lambda/MAIN 
             npm install
-            zip -r terraform/MAIN.zip .
+            zip -r ../../terraform/MAIN.zip .
 
       - run: 
           name: Run terraform 
