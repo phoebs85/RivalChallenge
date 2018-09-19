@@ -8,6 +8,7 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/node:7.10
+      - image: hashicorp/terraform:0.10.4
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -16,14 +17,11 @@ jobs:
 
     working_directory: ~/project
 
+    validate:
+    <<: *terraform
+
     steps:
       - checkout
-
-      - run: 
-          name: install terraform
-          command: | 
-            wget https://releases.hashicorp.com/terraform/0.6.8/terraform_0.6.8_linux_amd64.zip
-            unzip terraform_0.6.8_linux_amd64.zip -d terraform
 
       # Download and cache dependencies
       - restore_cache:
@@ -41,7 +39,7 @@ jobs:
         
       # run (Sandbox)
       - run: 
-          name: terraform 
+          name: Run terraform 
           command: |
             cd terraform
             terraform init
