@@ -21,7 +21,7 @@ jobs:
           key: v1-dependencies-{{ checksum "./lambda/MAIN/package.json" }}
 
   build_npm:
-     docker:
+    docker:
       # specify the version you desire here
       - image: circleci/node:8
 
@@ -44,25 +44,6 @@ jobs:
     working_directory: ~/project
 
     steps:
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "./lambda/MAIN/package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "./lambda/MAIN/package.json" }}
-        
-      # run (Sandbox)
-      - run: 
-          name: Zip Lambda Packages
-          command: |
-            zip -r terraform/MAIN.zip lambda/MAIN
-            zip -r terraform/MAIN2.zip lambda/MAIN2
-
       - run: 
           name: Run terraform 
           command: |
