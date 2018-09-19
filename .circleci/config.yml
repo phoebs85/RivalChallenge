@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: hashicorp/terraform:0.10.4
+      - image: hashicorp/terraform:0.11.03
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
