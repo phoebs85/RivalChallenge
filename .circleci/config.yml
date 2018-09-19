@@ -39,14 +39,12 @@ jobs:
     docker:
       - image: hashicorp/terraform:0.11.3
 
-    working_directory: ~/project
+    working_directory: ~/terraform
 
     steps:
       - run: 
           name: Run terraform 
           command: |
-            ls .
-            cd terraform
             terraform init
             terraform apply --auto-approve -var access_key="$AWS_ACCESS_KEY_ID" -var secret_key="$AWS_SECRET_ACCESS_KEY" -var environment="Sandbox"
 
