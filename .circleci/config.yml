@@ -39,8 +39,8 @@ jobs:
           name: Install terraform
           command: |
             wget https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_linux_amd64.zip
-            unzip terraform_0.11.7_linux_amd64.zip 
-            echo 'export PATH="/terraform:$PATH"' >> $BASH_ENV
+            unzip terraform_0.11.7_linux_amd64.zip -d terraform
+            sudo mv -f terraform/terraform /usr/local/bin/
 
       - run: 
           name: Run terraform 
