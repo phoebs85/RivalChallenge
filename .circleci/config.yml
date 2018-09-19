@@ -4,9 +4,10 @@
 #
 version: 2
 jobs:
-  checkout_code:
+  build:
     docker:
       - image: circleci/node:8
+      - image: hashicorp/terraform:0.11.3
 
     working_directory: ~/project
 
@@ -25,40 +26,16 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "./lambda/MAIN/package.json" }}
 
-  build_npm:
-    docker:
-      - image: circleci/node:8
-
-    working_directory: ~/project
-
-    steps:
-      # run (Sandbox)
       - run: 
-          name: Zip Lambda Packages
-          command: |
-            cd lambda/MAIN 
-            npm install
-            zip -r terraform/MAIN.zip .
+        name: Zip Lambda Packages
+        command: |
+          cd lambda/MAIN 
+          npm install
+          zip -r terraform/MAIN.zip .
 
-  build_terraform:
-    docker:
-      - image: hashicorp/terraform:0.11.3
-
-    working_directory: ~/project
-
-    steps:
       - run: 
-          name: Run terraform 
-          command: |
-            cd terraform
-            terraform init
-            terraform apply --auto-approve -var access_key="$AWS_ACCESS_KEY_ID" -var secret_key="$AWS_SECRET_ACCESS_KEY" -var environment="Sandbox"
-      
-
-workflows:
-  version: 2
-  build-and-deploy:
-    jobs:
-      - checkout_code
-      - build_npm
-      - build_terraform
+        name: Run terraform 
+        command: |
+          cd ../../terraform
+          terraform init
+          terraform apply --auto-approve -var access_key="$AWS_ACCESS_KEY_ID" -var secret_key="$AWS_SECRET_ACCESS_KEY" -var environment="Sandbox"
