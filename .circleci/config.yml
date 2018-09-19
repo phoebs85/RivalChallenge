@@ -40,8 +40,6 @@ jobs:
           key: v1-dependencies-{{ checksum "./lambda/MAIN/package.json" }}
         
       # run (Sandbox)
-      - run:
-          name: zip
       - run: 
           name: terraform 
           command: |
