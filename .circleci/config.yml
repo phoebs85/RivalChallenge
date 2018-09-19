@@ -16,7 +16,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "./lambda/MAIN/package.json" }}
+          - v1-dependencies-{{ checksum "./lambda/MAIN/package.json" }} 
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
@@ -24,6 +24,8 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "./lambda/MAIN/package.json" }}
+
+      
 
       - run: 
           name: Zip Lambda Packages
@@ -35,24 +37,15 @@ jobs:
             npm install 
             zip -r ../../terraform/MAIN2.zip .
 
-  deploy:
-    docker:
-      - image: hashicorp/terraform:0.11.3
+      - run: 
+          name: Install terraform
+          command: |
+            wget https://releases.hashicorp.com/terraform/0.6.8/terraform_0.6.8_linux_amd64.zip
+            unzip terraform_0.6.8_linux_amd64.zip -d terraform
 
-    working_directory: terraform
-
-    steps:
       - run: 
           name: Run terraform 
           command: |
+            cd ../../terraform
             terraform init
             terraform apply --auto-approve -var access_key="$AWS_ACCESS_KEY_ID" -var secret_key="$AWS_SECRET_ACCESS_KEY" -var environment="Sandbox"
-
-workflows:
-   version: 2
-   build_and_deploy:
-    jobs:
-      - build
-      - deploy:
-          requires:
-            - build
