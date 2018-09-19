@@ -4,7 +4,7 @@
 #
 version: 2
 jobs:
-  checkout:
+  checkout_code:
     docker:
       - image: circleci/node:8
 
@@ -55,4 +55,10 @@ jobs:
             terraform apply --auto-approve -var access_key="$AWS_ACCESS_KEY_ID" -var secret_key="$AWS_SECRET_ACCESS_KEY" -var environment="Sandbox"
       
 
-
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - checkout_code
+      - build_npm
+      - build_terraform
