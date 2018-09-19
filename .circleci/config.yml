@@ -32,10 +32,13 @@ jobs:
             cd lambda/MAIN 
             npm install
             zip -r ../../terraform/MAIN.zip .
+            cd ../MAIN2
+            npm install 
+            zip -r ../../terraform/MAIN2.zip .
 
       - run: 
           name: Run terraform 
           command: |
-            cd ../../terraform
+            cd terraform
             terraform init
             terraform apply --auto-approve -var access_key="$AWS_ACCESS_KEY_ID" -var secret_key="$AWS_SECRET_ACCESS_KEY" -var environment="Sandbox"
