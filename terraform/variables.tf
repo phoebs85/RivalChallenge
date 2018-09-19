@@ -1,6 +1,10 @@
 #Required Variables
+variable "access_key" {}
+variable "secret_key" {}
+variable "environment" {}
+
 variable "git_tags" {
-  default = "V1.0.0"
+  default = "V1.0.1"
 } //Tag in Git
 
 variable "is_debug" {
