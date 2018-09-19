@@ -3,10 +3,6 @@ variable "environment" {
   default = "Sandbox"
 }
 
-variable "lambda_pkg" {
-  default = "MAIN.zip"
-}
-
 variable "git_tags" {
   default = "V1.0.0"
 } //Tag in Git
