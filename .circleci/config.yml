@@ -33,6 +33,12 @@ jobs:
         
       # run (Sandbox)
       - run: 
+          name: Zip Lambda Packages
+          command: |
+            zip -r terraform/MAIN.zip lambda/MAIN
+            zip -r terraform/MAIN2.zip lambda/MAIN2
+
+      - run: 
           name: Run terraform 
           command: |
             cd terraform
