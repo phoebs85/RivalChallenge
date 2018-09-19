@@ -4,11 +4,6 @@
 #
 version: 2
 jobs:
-  dependencies:
-  pre:
-    - wget https://dl.bintray.com/mitchellh/terraform/terraform_0.6.3_linux_amd64.zip
-    - unzip terraform_0.6.3_linux_amd64.zip
-    
   build:
     docker:
       # specify the version you desire here
@@ -23,6 +18,12 @@ jobs:
 
     steps:
       - checkout
+
+      - run: 
+          name: install terraform
+          command: | 
+            wget https://releases.hashicorp.com/terraform/0.6.8/terraform_0.6.8_linux_amd64.zip
+            unzip terraform_0.6.8_linux_amd64.zip -d terraform
 
       # Download and cache dependencies
       - restore_cache:
